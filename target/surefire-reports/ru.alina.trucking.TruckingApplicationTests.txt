@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: ru.alina.trucking.TruckingApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 25.795 s - in ru.alina.trucking.TruckingApplicationTests

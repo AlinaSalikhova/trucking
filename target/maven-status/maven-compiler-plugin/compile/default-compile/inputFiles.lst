@@ -1,0 +1,16 @@
+/Users/alinasalikhova/Desktop/Trucking/src/main/java/ru/alina/trucking/services/UserService.java
+/Users/alinasalikhova/Desktop/Trucking/src/main/java/ru/alina/trucking/entities/Status.java
+/Users/alinasalikhova/Desktop/Trucking/src/main/java/ru/alina/trucking/configuration/InitialDataConfiguration.java
+/Users/alinasalikhova/Desktop/Trucking/src/main/java/ru/alina/trucking/controllers/TruckingStaticController.java
+/Users/alinasalikhova/Desktop/Trucking/src/main/java/ru/alina/trucking/entities/Role.java
+/Users/alinasalikhova/Desktop/Trucking/src/main/java/ru/alina/trucking/configuration/SecurityConfiguration.java
+/Users/alinasalikhova/Desktop/Trucking/src/main/java/ru/alina/trucking/entities/Application.java
+/Users/alinasalikhova/Desktop/Trucking/src/main/java/ru/alina/trucking/entities/User.java
+/Users/alinasalikhova/Desktop/Trucking/src/main/java/ru/alina/trucking/entities/jpa/UserRepository.java
+/Users/alinasalikhova/Desktop/Trucking/src/main/java/ru/alina/trucking/exceptions/UserNotFoundException.java
+/Users/alinasalikhova/Desktop/Trucking/src/main/java/ru/alina/trucking/entities/jpa/ApplicationRepository.java
+/Users/alinasalikhova/Desktop/Trucking/src/main/java/ru/alina/trucking/TruckingApplication.java
+/Users/alinasalikhova/Desktop/Trucking/src/main/java/ru/alina/trucking/exceptions/ApplicationNotFoundException.java
+/Users/alinasalikhova/Desktop/Trucking/src/main/java/ru/alina/trucking/entities/jpa/RoleRepository.java
+/Users/alinasalikhova/Desktop/Trucking/src/main/java/ru/alina/trucking/controllers/TruckingRestApiController.java
+/Users/alinasalikhova/Desktop/Trucking/src/main/java/ru/alina/trucking/entities/jpa/RoleKey.java
