@@ -37,7 +37,15 @@
       data-is-admin="${admin?c}">
 <div class="container-fluid">
     <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="/">Индустрия грузоперевозок</a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="navbar-brand" href="/">Индустрия грузоперевозок</a>
+            </li>
+            <li class="nav-item">
+                <a class="navbar-link" href="/application">Содать заявку</a>
+            </li>
+        </ul>
+
         <form class="form-inline">
             <div class="navbar-text"> Привет, ${username} &nbsp;</div>
             <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><a href="/logout">Выйти</a></button>
@@ -128,41 +136,7 @@
         </#if>
         <br>
         <br>
-        <h2>Подать заявку</h2>
-        <form action="/" method="POST">
-            <input type="hidden" name="deleteId"/>
-            <input type="hidden" name="updateId"/>
-            <h4>Данные о грузе</h4>
-            <label>Объем (м<sup>3</sup>):</label>
-            <input type="text" name="volume" placeholder="146.6" required pattern="\d+\.?\d+"/>
-            <br>
-            <label>Вес (кг):</label>
-            <input type="text" name="weight" placeholder="146.6" required pattern="\d+\.?\d+"/>
-            <br>
-            <h4>Направление</h4>
-            <label>Пункт А:</label>
-            <input type="text" name="addressFrom" placeholder="Россия, Пермь, ул. 25 октября 12" required/>
-            <br>
-            <br>
-            <label>Пункт Б:</label>
-            <input type="text" name="addressTo" placeholder="Россия, Пермь, ул. 25 октября 12" required/>
-            <br>
-            <h4>Контактные данные</h4>
-            <label>Ваше имя:</label>
-            <input type="text" name="userName" placeholder="Иван" required/>
-            <br>
-            <br>
-            <label>Номер телефона:</label>
-            <input type="text" name="phone" placeholder="89991234567" required/>
-            <label>Комментарий:</label>
-            <input type="text" name="comment" placeholder="Ваш комментарий" required/>
-            <br>
-            <br>
-            <button type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="right" title="После отправки заявки менеджер перезвонит вам в течении 10 минут">
-                Отправить заявку
-            </button>
 
-        </form>
 
     </div>
     <br><br><br>

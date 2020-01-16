@@ -17,68 +17,78 @@ import ru.alina.trucking.services.UserService;
 @Controller
 public class TruckingStaticController {
 
-	private UserService userService;
-	private ApplicationRepository applicationRepository;
-	
-	public TruckingStaticController(UserService userService,
-									ApplicationRepository applicationRepository) {
-		this.userService = userService;
-		this.applicationRepository = applicationRepository;
+    private UserService userService;
+    private ApplicationRepository applicationRepository;
+
+    public TruckingStaticController(UserService userService,
+                                    ApplicationRepository applicationRepository) {
+        this.userService = userService;
+        this.applicationRepository = applicationRepository;
+    }
+
+    @GetMapping("/")
+    public String home(Model model) {
+        String username = userService.getLoggedInUsername();
+        Boolean isAdmin = userService.isAdmin(username);
+        List<Application> applications = applicationRepository.findAll();
+        model.addAttribute("username", username);
+        model.addAttribute("admin", isAdmin);
+        model.addAttribute("applications", applications);
+        return "index";
+    }
+
+    @PostMapping("/")
+    public String addApplication(
+            Model model,
+            @RequestParam Long deleteId,
+            @RequestParam Long updateId) {
+        String username = userService.getLoggedInUsername();
+        if (deleteId != null) {
+            Application application = applicationRepository.findById(deleteId)
+                    .orElseThrow(() -> new ApplicationNotFoundException(String.valueOf(deleteId)));
+            applicationRepository.delete(application);
+        } else if (updateId != null) {
+            Application application = applicationRepository.findById(updateId)
+                    .orElseThrow(() -> new ApplicationNotFoundException(String.valueOf(updateId)));
+            application.setStatus(Status.COMPLETED);
+            applicationRepository.save(application);
+        }
+        List<Application> applications = applicationRepository.findAll();
+        model.addAttribute("username", username);
+        model.addAttribute("applications", applications);
+        return "redirect:/";
+    }
+
+
+    @GetMapping("/application")
+	public String myApplic(){
+
+    	return "application";
 	}
 
-	@GetMapping("/")
-	public String home(Model model) {
-		String username = userService.getLoggedInUsername();
-		Boolean isAdmin = userService.isAdmin(username);
-		List<Application> applications = applicationRepository.findAll();
-		model.addAttribute("username", username);
-		model.addAttribute("admin", isAdmin);
-		model.addAttribute("applications", applications);
-		return "index";
-	}
-	
-	@PostMapping("/")
-	public String addApplication(
-			Model model, 
-			@RequestParam String addressFrom,
-			@RequestParam String addressTo,
-			@RequestParam Double volume,
-			@RequestParam Double weight,
-			@RequestParam String phone,
-			@RequestParam String comment,
-			@RequestParam String userName,
-			@RequestParam Long deleteId,
-			@RequestParam Long updateId) {
-		String username = userService.getLoggedInUsername();
-		if (deleteId != null) {
-			//log.info(String.format("Deleting application: id %d", deleteId));
-			Application application = applicationRepository.findById(deleteId)
-					.orElseThrow(() -> new ApplicationNotFoundException(String.valueOf(deleteId)));
-			applicationRepository.delete(application);
-		} else if (updateId != null) {
-			//log.info(String.format("Closing application: id %d", updateId));
-			Application application = applicationRepository.findById(updateId)
-					.orElseThrow(() -> new ApplicationNotFoundException(String.valueOf(updateId)));
-			application.setStatus(Status.COMPLETED);
-			applicationRepository.save(application);
-		} else {
 
-			User user = userService.getUser(username);
-			Application application = new Application(user, addressFrom, addressTo, weight, volume, comment, phone, userName);
-			applicationRepository.save(application);
-		}
-		List<Application> applications = applicationRepository.findAll();
-		model.addAttribute("username", username);
-		model.addAttribute("applications", applications);
-	    return "redirect:/";
-	}
+	@PostMapping("/application")
+    public String newApplication(Model model,
+                                 @RequestParam String addressFrom,
+                                 @RequestParam String addressTo,
+                                 @RequestParam Double volume,
+                                 @RequestParam Double weight,
+                                 @RequestParam String phone,
+                                 @RequestParam String comment,
+                                 @RequestParam String userName) {
+        String username = userService.getLoggedInUsername();
+        User user = userService.getUser(username);
+        Application application = new Application(user, addressFrom, addressTo, weight, volume, comment, phone, userName);
+        applicationRepository.save(application);
+        return "redirect:/";
+    }
 
-	@GetMapping("/users")
-	public String users(Model model) {
-		String username = userService.getLoggedInUsername();
-		List<User> users = userService.getAll();
-		model.addAttribute("username", username);
-		model.addAttribute("users", users);
-		return "users";
-	}
+    @GetMapping("/users")
+    public String users(Model model) {
+        String username = userService.getLoggedInUsername();
+        List<User> users = userService.getAll();
+        model.addAttribute("username", username);
+        model.addAttribute("users", users);
+        return "users";
+    }
 }
